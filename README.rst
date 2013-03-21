@@ -23,3 +23,6 @@ TODO
 * ``moments`` benchmark doesn't work due to lack of support for ``string-to-float``.
 * ``pidigits`` benchmark doesn't work due to lack of extended integer support.
 * Many benchmarks can still be optimized.
+* Some benchmarks are still to be written: ``chameneos-redux``,
+  ``meteor-contest``, ``regex-dna``, ``reverse-complement`` and
+  ``thread-ring``
