@@ -15,9 +15,6 @@ In general, we want each example to be one file (if possible).
 TODO
 ----
 
-* ``binary-trees``, ``fannkuch``, ``fasta``, ``fibonacci``, ``harmonic``,
-  ``mandelbrot``, ``nestedloop``, ``strcat`` and ``takfp`` should provide a
-  default command line argument value.
 * ``nsieve`` provides an invalid default and should check for valid argument.
 * ``nsieve`` and ``sieve`` benchmarks don't seem to work properly.
 * ``fasta`` benchmark generates invalid output.

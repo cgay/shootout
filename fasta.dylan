@@ -131,7 +131,7 @@ define function make-random-fasta
 end function make-random-fasta;
 
 begin
-  let n = application-arguments()[0].string-to-integer;
+  let n = string-to-integer(element(application-arguments(), 0, default: "1000"));
   make-cumulative($iub);
   make-cumulative($homosapiens);
   

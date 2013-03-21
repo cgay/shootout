@@ -37,8 +37,9 @@ define function check(tree :: <tree>) => (res :: <integer>);
 end;
 
 begin
+  let arg = string-to-integer(element(application-arguments(), 0, default: "10"));
   let min-depth = 4;
-  let max-depth = max(min-depth + 2, application-arguments()[0].string-to-integer);
+  let max-depth = max(min-depth + 2, arg);
   let stretch-depth = max-depth + 1;
 
   format-out("stretch tree of depth %d\t check: %d\n",
