@@ -13,9 +13,9 @@ end module;
 define constant <tree> = type-union(<integer>, <node>);
 
 define class <node> (<object>)
-  slot left :: <tree>, required-init-keyword: left:;
-  slot item :: <integer>, required-init-keyword: item:;
-  slot right :: <tree>, required-init-keyword: right:;
+  constant slot left :: <tree>, required-init-keyword: left:;
+  constant slot item :: <integer>, required-init-keyword: item:;
+  constant slot right :: <tree>, required-init-keyword: right:;
 end;
 
 define sealed domain make(singleton(<node>));
