@@ -17,7 +17,7 @@ end module;
 define constant <double-vector> = limited(<vector>, of: <double-float>);
 
 define function eval-A (i :: <integer>, j :: <integer>) => result :: <double-float>;
-  1.0d0 / (truncate/((i + j) * (i + j + 1), 2) + i + 1);
+  1.0d0 / as(<double-float>, ash((i + j) * (i + j + 1), -1) + i + 1);
 end function eval-A;
 
 define function eval-A-times-u (u :: <double-vector>, Au :: <double-vector>);
