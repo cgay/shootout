@@ -45,7 +45,7 @@ define function eval-AtA-times-u (u :: <double-vector>, AtAu :: <double-vector>)
 end function eval-AtA-times-u;
 
 begin
-  let N = application-arguments()[0].string-to-integer;
+  let N = string-to-integer(element(application-arguments(), 0, default: "100"));
   let u = make(<double-vector>, size: N, fill: 1.0d0);
   let v = make(<double-vector>, size: N, fill: 1.0d0);
   for (i from 0 below 10)
