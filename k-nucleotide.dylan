@@ -28,8 +28,7 @@ define function kfrequency
      k :: <integer>,
      frame :: <integer>) => ();
   for (i from frame below sequence.size - k + 1 by k)
-    let sub = make(<string>, size: k);
-    for (offset from 0 below k) sub[offset] := sequence[i + offset] end;
+    let sub = copy-sequence(sequence, start: i, end: i + k);
     let record = element(freq, sub, default: #f);
     if (record)
       record.val := record.val + 1;
