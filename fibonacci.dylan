@@ -11,23 +11,16 @@ define module fibo
 end module;
 
 define function fibo (m :: <integer>) => (f :: <integer>)
-  let f = 1;
-  case 
-    m < 1     => 0;
-    m = 1     => 1;
-    otherwise =>
-      begin
-        let n1 = 0;
-        let n2 = 1;
-        for (i from 2 to m)
-          format-out("i = %d\n", i);
-          f := n1 + n2;
-          n1 := n2;
-          n2 := f;
+  local method fib (m, n1, n2) => (f :: <integer>)
+          if (m = 0)
+            n1
+          elseif (m = 1)
+            n2
+          else
+            fib(m - 1, n2, n1 + n2)
+          end
         end;
-      end;
-  end case;
-  f
+  fib(m, 0, 1)
 end function fibo;
 
 begin
