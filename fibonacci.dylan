@@ -10,13 +10,24 @@ define module fibo
   use format-out;
 end module;
 
-define function fibo(M :: <integer>)
- => result :: <integer>;
+define function fibo (m :: <integer>) => (f :: <integer>)
+  let f = 1;
   case 
-    M < 1     => 0;
-    M = 1     => 1;
-    otherwise => fibo (M - 2) + fibo (M - 1);
+    m < 1     => 0;
+    m = 1     => 1;
+    otherwise =>
+      begin
+        let n1 = 0;
+        let n2 = 1;
+        for (i from 2 to m)
+          format-out("i = %d\n", i);
+          f := n1 + n2;
+          n1 := n2;
+          n2 := f;
+        end;
+      end;
   end case;
+  f
 end function fibo;
 
 begin
