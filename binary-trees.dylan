@@ -10,30 +10,26 @@ define module binary-trees
   use format-out;
 end module;
 
-define constant <tree> = type-union(<integer>, <node>);
+define constant <tree> = false-or(<node>);
 
 define class <node> (<object>)
   constant slot left :: <tree>, required-init-keyword: left:;
-  constant slot item :: <integer>, required-init-keyword: item:;
   constant slot right :: <tree>, required-init-keyword: right:;
 end;
 
 define sealed domain make(singleton(<node>));
 define sealed domain initialize(<node>);
 
-define function build(n :: <integer>, d :: <integer>) => (res :: <tree>)
+define function build(d :: <integer>) => (res :: <tree>)
   if (d == 0)
-    n;
+    #f;
   else
-    make(<node>, item: n, left: build(2 * n - 1, d - 1), right: build(2 * n, d - 1));
+    make(<node>, left: build(d - 1), right: build(d - 1));
   end;
 end;
 
-define function check(tree :: <tree>) => (res :: <integer>);
-  select (tree by instance?)
-    <integer> => tree;
-    <node> => tree.item + tree.left.check - tree.right.check;
-  end;
+define function check(tree :: <tree>) => (res :: <integer>)
+  if (tree) 1 + tree.left.check + tree.right.check else 1 end
 end;
 
 begin
@@ -43,16 +39,16 @@ begin
   let stretch-depth = max-depth + 1;
 
   format-out("stretch tree of depth %d\t check: %d\n",
-             stretch-depth, build(0, stretch-depth).check);
+             stretch-depth, build(stretch-depth).check);
 
-  let long-lived-tree = build(0, max-depth);
+  let long-lived-tree = build(max-depth);
 
   for (d from min-depth to max-depth by 2)
     let iterations = ash(1, max-depth - d + min-depth);
     for (i from 1 to iterations,
-         c = 0 then c + build(i, d).check + build(-i, d).check)
+         c = 0 then c + build(d).check)
     finally
-      format-out("%d\t trees of depth %d\t check: %d\n", 2 * iterations, d, c);
+      format-out("%d\t trees of depth %d\t check: %d\n", iterations, d, c);
     end for;
   end for;
 
