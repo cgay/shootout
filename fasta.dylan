@@ -1,17 +1,5 @@
 module: fasta
 
-define library fasta
-  use common-dylan;
-  use io;
-end library;
-
-define module fasta
-  use common-dylan, exclude: { format-to-string };
-  use standard-io;
-  use streams;
-  use format-out;
-end module;
-
 define constant $alu :: <byte-string> =
   "GGCCGGGCGCGGTGGCTCACGCCTGTAATCCCAGCACTTTGG"
   "GAGGCCGAGGCGGGCGGATCACCTGAGGTCAGGAGTTCGAGA"
@@ -26,32 +14,36 @@ define sealed class <frequency> (<object>)
   constant slot c :: <byte-character>, required-init-keyword: c:;
 end class <frequency>;
 
-define constant $null-frequency :: <frequency> = make(<frequency>,c: '\<0>', p: 0.0d0);
+define constant $null-frequency :: <frequency> = make(<frequency>, c: '\<0>', p: 0.0d0);
 
 define constant <frequency-vector> = limited(<vector>, of: <frequency>);
 
-define constant $iub :: <frequency-vector> = make(<frequency-vector>,size: 15,fill: $null-frequency);
-$iub[0] := make(<frequency>,c: 'a',p: 0.27d0);
-$iub[1] := make(<frequency>,c: 'c',p: 0.12d0);
-$iub[2] := make(<frequency>,c: 'g',p: 0.12d0);
-$iub[3] := make(<frequency>,c: 't',p: 0.27d0);
-$iub[4] := make(<frequency>,c: 'B',p: 0.02d0);
-$iub[5] := make(<frequency>,c: 'D',p: 0.02d0);
-$iub[6] := make(<frequency>,c: 'H',p: 0.02d0);
-$iub[7] := make(<frequency>,c: 'K',p: 0.02d0);
-$iub[8] := make(<frequency>,c: 'M',p: 0.02d0);
-$iub[9] := make(<frequency>,c: 'N',p: 0.02d0);
-$iub[10] := make(<frequency>,c: 'R',p: 0.02d0);
-$iub[11] := make(<frequency>,c: 'S',p: 0.02d0);
-$iub[12] := make(<frequency>,c: 'V',p: 0.02d0);
-$iub[13] := make(<frequency>,c: 'W',p: 0.02d0);
-$iub[14] := make(<frequency>,c: 'Y',p: 0.02d0);
+define constant $iub :: <frequency-vector>
+  = begin
+      let v = make(<frequency-vector>, size: 15, fill: $null-frequency);
+      v[0] := make(<frequency>, c: 'a', p: 0.27d0);
+      v[1] := make(<frequency>, c: 'c', p: 0.12d0);
+      v[2] := make(<frequency>, c: 'g', p: 0.12d0);
+      v[3] := make(<frequency>, c: 't', p: 0.27d0);
+      v[4] := make(<frequency>, c: 'B', p: 0.02d0);
+      v[5] := make(<frequency>, c: 'D', p: 0.02d0);
+      v[6] := make(<frequency>, c: 'H', p: 0.02d0);
+      v[7] := make(<frequency>, c: 'K', p: 0.02d0);
+      v[8] := make(<frequency>, c: 'M', p: 0.02d0);
+      v[9] := make(<frequency>, c: 'N', p: 0.02d0);
+      v[10] := make(<frequency>, c: 'R', p: 0.02d0);
+      v[11] := make(<frequency>, c: 'S', p: 0.02d0);
+      v[12] := make(<frequency>, c: 'V', p: 0.02d0);
+      v[13] := make(<frequency>, c: 'W', p: 0.02d0);
+      v[14] := make(<frequency>, c: 'Y', p: 0.02d0);
+      v
+    end;
 
-define constant $homosapiens :: <frequency-vector> = make(<frequency-vector>,size: 4,fill: $null-frequency);
-$homosapiens[0] := make(<frequency>,c: 'a',p: 0.3029549426680d0);
-$homosapiens[1] := make(<frequency>,c: 'c',p: 0.1979883004921d0);
-$homosapiens[2] := make(<frequency>,c: 'g',p: 0.1975473066391d0);
-$homosapiens[3] := make(<frequency>,c: 't',p: 0.3015094502008d0);
+define constant $homosapiens :: <frequency-vector> = make(<frequency-vector>, size: 4, fill: $null-frequency);
+$homosapiens[0] := make(<frequency>, c: 'a', p: 0.3029549426680d0);
+$homosapiens[1] := make(<frequency>, c: 'c', p: 0.1979883004921d0);
+$homosapiens[2] := make(<frequency>, c: 'g', p: 0.1975473066391d0);
+$homosapiens[3] := make(<frequency>, c: 't', p: 0.3015094502008d0);
 
 define constant $ia = 3877;
 define constant $ic = 29573;
